@@ -259,3 +259,4 @@ Aplikasi dapat langsung diakses melalui browser di: **`http://127.0.0.1:8000`**
 2. Pilih filter tanggal atau status jika diperlukan.
 3. Klik tombol hijau **"Unduh Laporan Excel (.xls)"**.
 4. File spreadsheet otomatis terunduh lengkap dengan header resmi dan ringkasan data.
+

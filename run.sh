@@ -1,12 +1,17 @@
 #!/bin/bash
-# Script untuk menjalankan NikelFleet secara lokal di CachyOS / Linux
-echo "⚡ Menjalankan NikelFleet - Sistem Monitoring Kendaraan Tambang..."
+# NikelFleet Runner Script
+echo "⚡ Menjalankan NikelFleet..."
 
-# Pastikan path php & runtime terbaca
-if [ -d "./.php_bin" ]; then
-    export PATH="$(pwd)/.php_bin/usr/bin:$PATH"
-    export LD_LIBRARY_PATH="$(pwd)/.php_bin/usr/lib:$LD_LIBRARY_PATH"
+BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Pastikan PHP membaca konfigurasi php.ini untuk ekstensi pdo_sqlite
+if [ -d "$BASE_DIR/.php_bin" ]; then
+    export PATH="$BASE_DIR/.php_bin/usr/bin:$PATH"
+    export PHPRC="$BASE_DIR/.php_bin/php.ini"
+    export LD_LIBRARY_PATH="$BASE_DIR/.php_bin/usr/lib:${LD_LIBRARY_PATH}"
+elif [ -d "$HOME/.local/php_pkg/etc" ]; then
+    export PHPRC="$HOME/.local/php_pkg/etc"
+    export LD_LIBRARY_PATH="$HOME/.local/php_pkg/usr/lib:${LD_LIBRARY_PATH}"
 fi
 
-# Jalankan server Laravel di port 8000
-php -c ./.php_bin/php.ini artisan serve --host=127.0.0.1 --port=8000
+php artisan serve --host=127.0.0.1 --port=8000

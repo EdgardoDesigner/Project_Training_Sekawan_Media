@@ -1,225 +1,226 @@
 @extends('layouts.app')
 
-@section('title', 'Admin Dashboard - NikelFleet Monitoring')
+@section('title', 'Dashboard Monitoring — NikelFleet')
 
 @section('content')
 <div class="space-y-6">
 
-    <!-- Welcome & Quick Action Hero Banner -->
-    <div class="relative overflow-hidden bg-gradient-to-br from-mining-950 via-slate-900 to-emerald-950 rounded-3xl p-6 sm:p-8 text-white shadow-2xl border border-slate-800">
-        <!-- Background Ambient Glow -->
-        <div class="absolute -top-24 -right-24 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
-        <div class="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-            <div class="space-y-2">
-                <div class="inline-flex items-center space-x-2 bg-emerald-500/15 text-emerald-400 text-xs font-bold px-3 py-1 rounded-full border border-emerald-500/30">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                    <span>Monitoring Operasional Tambang Nikel</span>
-                </div>
-                <h1 class="text-2xl sm:text-3xl font-black tracking-tight text-white">
-                    Halo, {{ Auth::user()->nama }}! 👋
-                </h1>
-                <p class="text-xs sm:text-sm text-slate-300 max-w-xl leading-relaxed">
-                    Kelola pergerakan armada tambang, pantau konsumsi BBM, cek jadwal servis berkala, dan kontrol alur persetujuan berjenjang.
-                </p>
+    <!-- Top Hero Banner: Clean Minimalist Enterprise (High Contrast, No Emojis, No Neon) -->
+    <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm flex flex-col md:flex-row md:items-center md:justify-between gap-5">
+        <div class="space-y-1.5">
+            <div class="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-md text-[11px] font-semibold bg-slate-100 text-slate-700 border border-slate-200/80">
+                <i data-lucide="map-pin" class="w-3.5 h-3.5 text-slate-500"></i>
+                <span>Operasional 8 Lokasi Tambang Nikel</span>
             </div>
+            <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
+                Pusat Monitoring & Pemesanan Kendaraan
+            </h1>
+            <p class="text-xs sm:text-sm text-slate-600 max-w-2xl leading-relaxed">
+                Selamat bertugas, <strong class="text-slate-900">{{ Auth::user()->nama }}</strong>. Pantau jadwal pemakaian armada, jadwal servis berkala, dan status alur persetujuan berjenjang.
+            </p>
+        </div>
 
-            <div class="flex-shrink-0 flex flex-wrap gap-3">
-                <a href="{{ route('admin.pemesanan.create') }}" 
-                   class="inline-flex items-center space-x-2 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-mining-950 font-black px-5 py-3.5 rounded-2xl shadow-xl shadow-emerald-500/25 transition transform active:scale-95 text-xs sm:text-sm">
-                    <i data-lucide="calendar-plus" class="w-4 h-4 stroke-[2.5]"></i>
-                    <span>+ Buat Pemesanan Kendaraan</span>
-                </a>
+        <div class="flex-shrink-0 flex items-center space-x-2.5">
+            <a href="{{ route('admin.pemesanan.create') }}" 
+               class="inline-flex items-center space-x-2 px-4 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-xl text-xs sm:text-sm shadow-sm transition active:scale-95">
+                <i data-lucide="plus" class="w-4 h-4 stroke-[2.5]"></i>
+                <span>Buat Pemesanan</span>
+            </a>
 
-                <a href="{{ route('admin.kendaraan.index') }}" 
-                   class="inline-flex items-center space-x-2 bg-slate-800/80 hover:bg-slate-700/80 text-slate-200 font-bold px-4 py-3.5 rounded-2xl border border-slate-700 transition text-xs sm:text-sm">
-                    <i data-lucide="truck" class="w-4 h-4 text-emerald-400"></i>
-                    <span>Cek Armada</span>
-                </a>
-            </div>
+            <a href="{{ route('admin.kendaraan.index') }}" 
+               class="inline-flex items-center space-x-2 px-4 py-2.5 bg-white hover:bg-slate-50 text-slate-700 font-semibold rounded-xl border border-slate-300 text-xs sm:text-sm shadow-sm transition active:scale-95">
+                <i data-lucide="truck" class="w-4 h-4 text-slate-500"></i>
+                <span>Daftar Armada</span>
+            </a>
         </div>
     </div>
 
-    <!-- Stat Metrics (4 Cards with Preline / Flowbite Styling) -->
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-5">
+    <!-- 4 Minimalist Stat Cards -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
         
-        <!-- Card 1: Total Armada -->
-        <div class="bg-white p-4 sm:p-5 rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-md transition group">
-            <div class="flex items-center justify-between mb-3">
-                <span class="text-[11px] font-extrabold uppercase tracking-wider text-slate-400">Total Kendaraan</span>
-                <div class="w-10 h-10 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center group-hover:scale-110 transition transform">
-                    <i data-lucide="car" class="w-5 h-5"></i>
+        <!-- Metric 1: Total Armada -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+            <div class="flex items-center justify-between">
+                <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Total Armada</span>
+                <div class="w-8 h-8 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center">
+                    <i data-lucide="truck" class="w-4 h-4"></i>
                 </div>
             </div>
-            <div class="text-2xl sm:text-3xl font-black text-slate-900">{{ $totalKendaraan }}</div>
-            <div class="text-[11px] text-emerald-600 font-semibold flex items-center space-x-1 mt-1">
-                <i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i>
-                <span>Tersedia & Siap Kerja</span>
+            <div class="mt-3">
+                <div class="text-2xl sm:text-3xl font-bold text-slate-900">{{ $totalKendaraan }}</div>
+                <div class="text-xs text-slate-500 mt-1 flex items-center space-x-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
+                    <span>Tersedia & Siap Operasi</span>
+                </div>
             </div>
         </div>
 
-        <!-- Card 2: Sedang Digunakan (On Duty) -->
-        <div class="bg-white p-4 sm:p-5 rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-md transition group">
-            <div class="flex items-center justify-between mb-3">
-                <span class="text-[11px] font-extrabold uppercase tracking-wider text-slate-400">Sedang Digunakan</span>
-                <div class="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center group-hover:scale-110 transition transform">
-                    <i data-lucide="activity" class="w-5 h-5"></i>
+        <!-- Metric 2: Kendaraan Sedang Digunakan -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+            <div class="flex items-center justify-between">
+                <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Sedang Bertugas</span>
+                <div class="w-8 h-8 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center">
+                    <i data-lucide="navigation" class="w-4 h-4 text-blue-600"></i>
                 </div>
             </div>
-            <div class="text-2xl sm:text-3xl font-black text-emerald-600">{{ $kendaraanAktif }}</div>
-            <div class="text-[11px] text-slate-500 font-medium mt-1">
-                Unit beroperasi di lapangan
+            <div class="mt-3">
+                <div class="text-2xl sm:text-3xl font-bold text-slate-900">{{ $kendaraanAktif }}</div>
+                <div class="text-xs text-slate-500 mt-1 flex items-center space-x-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                    <span>Unit aktif di lapangan</span>
+                </div>
             </div>
         </div>
 
-        <!-- Card 3: Menunggu Approval -->
-        <div class="bg-white p-4 sm:p-5 rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-md transition group">
-            <div class="flex items-center justify-between mb-3">
-                <span class="text-[11px] font-extrabold uppercase tracking-wider text-slate-400">Butuh Approval</span>
-                <div class="w-10 h-10 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center group-hover:scale-110 transition transform">
-                    <i data-lucide="clock" class="w-5 h-5"></i>
+        <!-- Metric 3: Menunggu Approval -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+            <div class="flex items-center justify-between">
+                <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Butuh Approval</span>
+                <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-700 flex items-center justify-center">
+                    <i data-lucide="clock" class="w-4 h-4"></i>
                 </div>
             </div>
-            <div class="text-2xl sm:text-3xl font-black text-amber-600">{{ $pesananMenunggu }}</div>
-            <div class="text-[11px] text-amber-700 font-semibold flex items-center space-x-1 mt-1">
-                <i data-lucide="git-pull-request" class="w-3.5 h-3.5"></i>
-                <span>Level 1 & Level 2</span>
+            <div class="mt-3">
+                <div class="text-2xl sm:text-3xl font-bold text-slate-900">{{ $pesananMenunggu }}</div>
+                <div class="text-xs text-amber-800 font-medium mt-1 flex items-center space-x-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                    <span>Antrean Level 1 & Level 2</span>
+                </div>
             </div>
         </div>
 
-        <!-- Card 4: Jadwal Servis Mendekat -->
-        <div class="bg-white p-4 sm:p-5 rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-md transition group">
-            <div class="flex items-center justify-between mb-3">
-                <span class="text-[11px] font-extrabold uppercase tracking-wider text-slate-400">Jadwal Servis</span>
-                <div class="w-10 h-10 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center group-hover:scale-110 transition transform">
-                    <i data-lucide="wrench" class="w-5 h-5"></i>
+        <!-- Metric 4: Jadwal Servis -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+            <div class="flex items-center justify-between">
+                <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Jadwal Servis</span>
+                <div class="w-8 h-8 rounded-lg bg-rose-50 text-rose-700 flex items-center justify-center">
+                    <i data-lucide="wrench" class="w-4 h-4"></i>
                 </div>
             </div>
-            <div class="text-2xl sm:text-3xl font-black text-rose-600">{{ $kendaraanPerluServis }}</div>
-            <div class="text-[11px] text-rose-700 font-medium mt-1">
-                Jatuh tempo &le; 14 hari
+            <div class="mt-3">
+                <div class="text-2xl sm:text-3xl font-bold text-slate-900">{{ $kendaraanPerluServis }}</div>
+                <div class="text-xs text-rose-800 font-medium mt-1 flex items-center space-x-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
+                    <span>Jatuh tempo &le; 14 hari</span>
+                </div>
             </div>
         </div>
 
     </div>
 
-    <!-- Interactive Charts Section (Fulfills Soal 5: Dashboard Grafik Pemakaian Kendaraan) -->
+    <!-- Charts Section (Minimalist Corporate Palette: Slate, Charcoal, Subtle Steel) -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
-        <!-- Chart 1: Tren Pemakaian Kendaraan (Bar Chart with Line Overlay - 2 Cols) -->
-        <div class="lg:col-span-2 bg-white p-5 sm:p-6 rounded-3xl border border-slate-200/80 shadow-sm space-y-4">
-            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+        <!-- Chart 1: Frekuensi Pemakaian (2 Cols) -->
+        <div class="lg:col-span-2 bg-white p-5 sm:p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+            <div class="flex items-center justify-between">
                 <div>
-                    <h2 class="text-sm sm:text-base font-extrabold text-slate-800 flex items-center space-x-2">
-                        <i data-lucide="bar-chart-3" class="w-4 h-4 text-emerald-600"></i>
+                    <h2 class="text-sm font-bold text-slate-900 flex items-center space-x-2">
+                        <i data-lucide="trending-up" class="w-4 h-4 text-emerald-600"></i>
                         <span>Grafik Frekuensi Pemakaian Kendaraan</span>
                     </h2>
-                    <p class="text-xs text-slate-400">Tren intensitas pemesanan armada per periode bulanan</p>
+                    <p class="text-xs text-slate-500 mt-0.5">Statistik tren pemesanan armada per periode bulanan</p>
                 </div>
-                <div class="flex items-center space-x-2 text-[11px] font-bold">
-                    <span class="inline-flex items-center space-x-1 bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded-lg border border-emerald-200">
-                        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-                        <span>Trip Operasional</span>
-                    </span>
-                </div>
+                <span class="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                    <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+                    <span>Trip Operasional</span>
+                </span>
             </div>
 
-            <!-- Canvas Container -->
-            <div class="relative h-64 sm:h-72 w-full">
+            <div class="relative h-64 w-full">
                 <canvas id="usageTrendChart"></canvas>
             </div>
         </div>
 
-        <!-- Chart 2: Distribusi Armada & Kepemilikan (Doughnut Chart - 1 Col) -->
-        <div class="bg-white p-5 sm:p-6 rounded-3xl border border-slate-200/80 shadow-sm space-y-4 flex flex-col justify-between">
+        <!-- Chart 2: Komposisi Armada (1 Col) -->
+        <div class="bg-white p-5 sm:p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4 flex flex-col justify-between">
             <div>
-                <h2 class="text-sm sm:text-base font-extrabold text-slate-800 flex items-center space-x-2">
-                    <i data-lucide="pie-chart" class="w-4 h-4 text-emerald-600"></i>
-                    <span>Kategori & Kepemilikan</span>
+                <h2 class="text-sm font-bold text-slate-900 flex items-center space-x-2">
+                    <i data-lucide="pie-chart" class="w-4 h-4 text-slate-700"></i>
+                    <span>Komposisi Armada</span>
                 </h2>
-                <p class="text-xs text-slate-400">Rasio unit orang vs barang & milik vs sewa</p>
+                <p class="text-xs text-slate-500 mt-0.5">Kategori angkutan & jenis kepemilikan</p>
             </div>
 
-            <div class="relative h-48 w-full flex items-center justify-center my-auto">
+            <div class="relative h-44 w-full flex items-center justify-center my-auto">
                 <canvas id="fleetDistributionChart"></canvas>
             </div>
 
-            <!-- Legend Info List -->
-            <div class="grid grid-cols-2 gap-2 pt-3 border-t border-slate-100 text-[11px]">
-                <div class="bg-slate-50 p-2 rounded-xl text-center">
-                    <div class="text-slate-400">Angkutan Orang</div>
-                    <div class="font-bold text-slate-800 mt-0.5">{{ $totalOrang }} Unit</div>
+            <div class="grid grid-cols-2 gap-2 pt-3 border-t border-slate-100 text-xs">
+                <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                    <div class="text-[10px] text-slate-500 uppercase font-semibold">Angkutan Orang</div>
+                    <div class="text-sm font-bold text-slate-900 mt-0.5">{{ $totalOrang }} Unit</div>
                 </div>
-                <div class="bg-slate-50 p-2 rounded-xl text-center">
-                    <div class="text-slate-400">Angkutan Barang</div>
-                    <div class="font-bold text-slate-800 mt-0.5">{{ $totalBarang }} Unit</div>
+                <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                    <div class="text-[10px] text-slate-500 uppercase font-semibold">Angkutan Barang</div>
+                    <div class="text-sm font-bold text-slate-900 mt-0.5">{{ $totalBarang }} Unit</div>
                 </div>
-                <div class="bg-emerald-50 text-emerald-800 p-2 rounded-xl text-center border border-emerald-100">
-                    <div class="text-emerald-600">Milik Sendiri</div>
-                    <div class="font-bold mt-0.5">{{ $totalMilik }} Unit</div>
+                <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                    <div class="text-[10px] text-slate-500 uppercase font-semibold">Milik Sendiri</div>
+                    <div class="text-sm font-bold text-slate-900 mt-0.5">{{ $totalMilik }} Unit</div>
                 </div>
-                <div class="bg-purple-50 text-purple-800 p-2 rounded-xl text-center border border-purple-100">
-                    <div class="text-purple-600">Sewa Vendor</div>
-                    <div class="font-bold mt-0.5">{{ $totalSewa }} Unit</div>
+                <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                    <div class="text-[10px] text-slate-500 uppercase font-semibold">Sewa Rental</div>
+                    <div class="text-sm font-bold text-slate-900 mt-0.5">{{ $totalSewa }} Unit</div>
                 </div>
             </div>
         </div>
 
     </div>
 
-    <!-- 2 Column Layout: Pemesanan Terbaru & Log Aktivitas -->
+    <!-- 2 Column Section: Pemesanan Terbaru & Audit Log -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-        <!-- Column 1 & 2: Pemesanan Terbaru (2 cols) -->
-        <div class="lg:col-span-2 bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden flex flex-col">
-            <div class="p-5 sm:p-6 border-b border-slate-100 flex items-center justify-between">
+        <!-- Column 1 & 2: Pemesanan Terbaru -->
+        <div class="lg:col-span-2 bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
+            <div class="p-5 border-b border-slate-100 flex items-center justify-between">
                 <div>
-                    <h2 class="text-sm sm:text-base font-extrabold text-slate-800 flex items-center space-x-2">
-                        <i data-lucide="clipboard-list" class="w-4 h-4 text-emerald-600"></i>
-                        <span>Pemesanan Terbaru</span>
+                    <h2 class="text-sm font-bold text-slate-900 flex items-center space-x-2">
+                        <i data-lucide="clipboard-list" class="w-4 h-4 text-slate-700"></i>
+                        <span>Daftar Pemesanan Terbaru</span>
                     </h2>
-                    <p class="text-xs text-slate-400">Daftar transaksi pengajuan terkini</p>
+                    <p class="text-xs text-slate-500 mt-0.5">5 transaksi pengajuan kendaraan terakhir</p>
                 </div>
-                <a href="{{ route('admin.pemesanan.index') }}" class="text-xs font-bold text-emerald-600 hover:text-emerald-700 flex items-center space-x-1 group">
+                <a href="{{ route('admin.pemesanan.index') }}" class="text-xs font-semibold text-slate-700 hover:text-slate-900 flex items-center space-x-1">
                     <span>Lihat Semua</span>
-                    <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition transform"></i>
+                    <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
                 </a>
             </div>
 
-            <!-- List Cards / Table -->
+            <!-- List Content -->
             <div class="divide-y divide-slate-100 flex-1">
                 @forelse($pemesananTerbaru as $p)
-                <div class="p-4 sm:p-5 hover:bg-slate-50/70 transition flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div class="p-4 sm:p-5 hover:bg-slate-50 transition flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div class="space-y-1.5">
                         <div class="flex items-center space-x-2">
-                            <span class="font-mono text-xs font-bold text-slate-800 bg-slate-100 px-2.5 py-0.5 rounded-lg border border-slate-200">
+                            <span class="font-mono text-xs font-bold text-slate-800 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
                                 {{ $p->kode_pemesanan }}
                             </span>
 
                             @if($p->status_pemesanan === 'menunggu_level_1')
-                                <span class="text-[11px] font-bold bg-amber-50 text-amber-700 border border-amber-200 px-2.5 py-0.5 rounded-full inline-flex items-center space-x-1">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
-                                    <span>Menunggu L1</span>
+                                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-amber-50 text-amber-800 border border-amber-200">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                                    <span>Menunggu Level 1</span>
                                 </span>
                             @elseif($p->status_pemesanan === 'menunggu_level_2')
-                                <span class="text-[11px] font-bold bg-blue-50 text-blue-700 border border-blue-200 px-2.5 py-0.5 rounded-full inline-flex items-center space-x-1">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
-                                    <span>Menunggu L2</span>
+                                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-800 border border-blue-200">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                                    <span>Menunggu Level 2</span>
                                 </span>
                             @elseif($p->status_pemesanan === 'disetujui')
-                                <span class="text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-0.5 rounded-full inline-flex items-center space-x-1">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                                    <span>Disetujui (Siap Jalan)</span>
+                                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+                                    <span>Disetujui (On Duty)</span>
                                 </span>
                             @elseif($p->status_pemesanan === 'ditolak')
-                                <span class="text-[11px] font-bold bg-rose-50 text-rose-700 border border-rose-200 px-2.5 py-0.5 rounded-full inline-flex items-center space-x-1">
+                                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-rose-50 text-rose-800 border border-rose-200">
                                     <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
                                     <span>Ditolak</span>
                                 </span>
                             @elseif($p->status_pemesanan === 'selesai')
-                                <span class="text-[11px] font-bold bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded-full inline-flex items-center space-x-1">
-                                    <span>✓ Selesai</span>
+                                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-700 border border-slate-200">
+                                    <i data-lucide="check" class="w-3 h-3 text-slate-600"></i>
+                                    <span>Selesai</span>
                                 </span>
                             @endif
                         </div>
@@ -228,17 +229,17 @@
                             {{ $p->nama_pemesan }} <span class="text-xs font-normal text-slate-500">({{ $p->divisi_pemesan }})</span>
                         </div>
 
-                        <div class="text-xs text-slate-500 flex flex-wrap gap-x-3 gap-y-1">
-                            <span class="inline-flex items-center space-x-1">
+                        <div class="text-xs text-slate-500 flex flex-wrap gap-x-4 gap-y-1">
+                            <span class="flex items-center space-x-1">
                                 <i data-lucide="truck" class="w-3.5 h-3.5 text-slate-400"></i>
                                 <span>{{ $p->kendaraan->nomor_lambung }} - {{ $p->kendaraan->merk_model }}</span>
                             </span>
-                            <span class="inline-flex items-center space-x-1">
-                                <i data-lucide="map-pin" class="w-3.5 h-3.5 text-emerald-500"></i>
+                            <span class="flex items-center space-x-1">
+                                <i data-lucide="map-pin" class="w-3.5 h-3.5 text-slate-400"></i>
                                 <span>{{ $p->lokasiTujuan->nama_lokasi }}</span>
                             </span>
-                            <span class="inline-flex items-center space-x-1">
-                                <i data-lucide="clock" class="w-3.5 h-3.5 text-slate-400"></i>
+                            <span class="flex items-center space-x-1">
+                                <i data-lucide="calendar" class="w-3.5 h-3.5 text-slate-400"></i>
                                 <span>{{ $p->tanggal_mulai->format('d M H:i') }}</span>
                             </span>
                         </div>
@@ -246,9 +247,9 @@
 
                     <div class="flex-shrink-0">
                         <a href="{{ route('admin.pemesanan.show', $p->id) }}" 
-                           class="w-full sm:w-auto text-center inline-flex items-center justify-center space-x-1.5 text-xs font-bold px-3.5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl transition">
+                           class="inline-flex items-center space-x-1 px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition">
                             <span>Detail</span>
-                            <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                            <i data-lucide="arrow-right" class="w-3 h-3"></i>
                         </a>
                     </div>
                 </div>
@@ -260,17 +261,17 @@
             </div>
         </div>
 
-        <!-- Column 3: Log Aktivitas Terbaru (1 col) -->
-        <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden flex flex-col">
-            <div class="p-5 sm:p-6 border-b border-slate-100 flex items-center justify-between">
+        <!-- Column 3: Log Aktivitas Terbaru -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
+            <div class="p-5 border-b border-slate-100 flex items-center justify-between">
                 <div>
-                    <h2 class="text-sm sm:text-base font-extrabold text-slate-800 flex items-center space-x-2">
-                        <i data-lucide="history" class="w-4 h-4 text-emerald-600"></i>
+                    <h2 class="text-sm font-bold text-slate-900 flex items-center space-x-2">
+                        <i data-lucide="shield-check" class="w-4 h-4 text-slate-700"></i>
                         <span>Audit Log Sistem</span>
                     </h2>
-                    <p class="text-xs text-slate-400">Rekam jejak sistem terkini</p>
+                    <p class="text-xs text-slate-500 mt-0.5">Rekam jejak transaksi terkini</p>
                 </div>
-                <a href="{{ route('admin.logs.index') }}" class="text-xs font-bold text-emerald-600 hover:text-emerald-700">
+                <a href="{{ route('admin.logs.index') }}" class="text-xs font-semibold text-slate-700 hover:text-slate-900">
                     Semua &rarr;
                 </a>
             </div>
@@ -278,13 +279,13 @@
             <div class="p-5 space-y-4 flex-1">
                 @forelse($logTerbaru as $log)
                 <div class="flex items-start space-x-3 text-xs">
-                    <div class="w-7 h-7 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center font-bold flex-shrink-0 mt-0.5">
-                        <i data-lucide="activity" class="w-3.5 h-3.5 text-emerald-600"></i>
+                    <div class="w-7 h-7 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center font-bold flex-shrink-0 mt-0.5 border border-slate-200">
+                        <i data-lucide="activity" class="w-3.5 h-3.5 text-slate-500"></i>
                     </div>
                     <div class="flex-1">
-                        <div class="font-bold text-slate-900">{{ $log->aksi }}</div>
+                        <div class="font-bold text-slate-800">{{ $log->aksi }}</div>
                         <div class="text-slate-600 mt-0.5 leading-relaxed">{{ $log->deskripsi }}</div>
-                        <div class="text-[10px] text-slate-400 mt-1 flex items-center space-x-2">
+                        <div class="text-[10px] text-slate-400 mt-1 flex items-center space-x-1.5">
                             <span>{{ $log->pengguna->nama ?? 'Sistem' }}</span>
                             <span>&bull;</span>
                             <span>{{ $log->created_at->diffForHumans() }}</span>
@@ -307,93 +308,115 @@
 @push('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // 1. Inisialisasi Chart 1: Tren Pemakaian Kendaraan
-        const ctxUsage = document.getElementById('usageTrendChart').getContext('2d');
-        const gradient = ctxUsage.createLinearGradient(0, 0, 0, 300);
-        gradient.addColorStop(0, 'rgba(16, 185, 129, 0.4)');
-        gradient.addColorStop(1, 'rgba(16, 185, 129, 0.0)');
+        // Chart 1: Frekuensi Pemakaian (Modern Smooth Emerald Gradient Area Chart)
+        const canvasUsage = document.getElementById('usageTrendChart');
+        if (canvasUsage) {
+            const ctxUsage = canvasUsage.getContext('2d');
+            const gradient = ctxUsage.createLinearGradient(0, 0, 0, 240);
+            gradient.addColorStop(0, 'rgba(5, 150, 105, 0.28)');
+            gradient.addColorStop(1, 'rgba(5, 150, 105, 0.0)');
 
-        new Chart(ctxUsage, {
-            type: 'bar',
-            data: {
-                labels: {!! json_encode($chartBulan) !!},
-                datasets: [
-                    {
-                        label: 'Frekuensi Pemakaian',
-                        data: {!! json_encode($chartTotalPemakaian) !!},
-                        backgroundColor: '#10b981',
-                        borderRadius: 8,
-                        barPercentage: 0.5,
-                    },
-                    {
-                        label: 'Tren Rata-rata',
-                        data: {!! json_encode($chartTotalPemakaian) !!},
-                        type: 'line',
-                        borderColor: '#0f172a',
-                        borderWidth: 2,
-                        pointBackgroundColor: '#10b981',
-                        pointBorderColor: '#fff',
-                        pointBorderWidth: 2,
-                        pointRadius: 4,
-                        tension: 0.3,
-                        fill: false
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false },
-                    tooltip: {
-                        backgroundColor: '#0f172a',
-                        titleFont: { size: 12, weight: 'bold' },
-                        bodyFont: { size: 12 },
-                        padding: 10,
-                        cornerRadius: 10
-                    }
+            new Chart(ctxUsage, {
+                type: 'line',
+                data: {
+                    labels: {!! json_encode($chartBulan) !!},
+                    datasets: [
+                        {
+                            label: 'Trip Operasional',
+                            data: {!! json_encode($chartTotalPemakaian) !!},
+                            borderColor: '#059669',
+                            borderWidth: 3,
+                            backgroundColor: gradient,
+                            fill: true,
+                            tension: 0.38,
+                            pointBackgroundColor: '#059669',
+                            pointBorderColor: '#ffffff',
+                            pointBorderWidth: 2,
+                            pointRadius: 4.5,
+                            pointHoverRadius: 7,
+                            pointHoverBackgroundColor: '#047857',
+                            pointHoverBorderColor: '#ffffff',
+                            pointHoverBorderWidth: 2.5,
+                        }
+                    ]
                 },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: { color: '#f1f5f9' },
-                        ticks: { font: { size: 11 } }
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
                     },
-                    x: {
-                        grid: { display: false },
-                        ticks: { font: { size: 11 } }
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#0f172a',
+                            titleFont: { size: 12, family: "'Plus Jakarta Sans', sans-serif", weight: 'bold' },
+                            bodyFont: { size: 12, family: "'Plus Jakarta Sans', sans-serif" },
+                            padding: 10,
+                            cornerRadius: 10,
+                            displayColors: false,
+                            callbacks: {
+                                label: function(context) {
+                                    return context.parsed.y + ' Trip Pemesanan';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: '#f1f5f9' },
+                            ticks: {
+                                color: '#64748b',
+                                font: { size: 11, family: "'Plus Jakarta Sans', sans-serif" }
+                            }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: {
+                                color: '#64748b',
+                                font: { size: 11, family: "'Plus Jakarta Sans', sans-serif" }
+                            }
+                        }
                     }
                 }
-            }
-        });
+            });
+        }
 
-        // 2. Inisialisasi Chart 2: Distribusi Armada
-        const ctxDist = document.getElementById('fleetDistributionChart').getContext('2d');
-        new Chart(ctxDist, {
-            type: 'doughnut',
-            data: {
-                labels: ['Angkutan Orang', 'Angkutan Barang'],
-                datasets: [{
-                    data: [{{ $totalOrang }}, {{ $totalBarang }}],
-                    backgroundColor: ['#10b981', '#3b82f6'],
-                    borderWidth: 3,
-                    borderColor: '#ffffff',
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                cutout: '70%',
-                plugins: {
-                    legend: { display: false },
-                    tooltip: {
-                        backgroundColor: '#0f172a',
-                        padding: 10,
-                        cornerRadius: 10
+        // Chart 2: Komposisi Armada (Vibrant Emerald & Sky Palette)
+        const canvasDist = document.getElementById('fleetDistributionChart');
+        if (canvasDist) {
+            const ctxDist = canvasDist.getContext('2d');
+            new Chart(ctxDist, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Angkutan Orang', 'Angkutan Barang'],
+                    datasets: [{
+                        data: [{{ $totalOrang }}, {{ $totalBarang }}],
+                        backgroundColor: ['#059669', '#0284c7'],
+                        hoverBackgroundColor: ['#047857', '#0369a1'],
+                        borderWidth: 2,
+                        borderColor: '#ffffff',
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '72%',
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#0f172a',
+                            titleFont: { size: 12, family: "'Plus Jakarta Sans', sans-serif" },
+                            bodyFont: { size: 12, family: "'Plus Jakarta Sans', sans-serif" },
+                            padding: 10,
+                            cornerRadius: 10
+                        }
                     }
                 }
-            }
-        });
+            });
+        }
     });
 </script>
 @endpush

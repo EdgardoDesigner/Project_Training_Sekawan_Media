@@ -1,6 +1,7 @@
 <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    @verbatim
     <!--[if gte mso 9]>
     <xml>
     <x:ExcelWorkbook>
@@ -15,6 +16,7 @@
     </x:ExcelWorkbook>
     </xml>
     <![endif]-->
+    @endverbatim
     <style>
         table { border-collapse: collapse; width: 100%; font-family: Arial, sans-serif; }
         th { background-color: #047857; color: #ffffff; font-weight: bold; padding: 10px; border: 1px solid #000000; text-align: center; }

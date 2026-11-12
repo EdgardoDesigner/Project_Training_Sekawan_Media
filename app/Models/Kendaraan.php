@@ -56,5 +56,19 @@ class Kendaraan extends Model
     {
         return $this->hasMany(CatatanServis::class, 'kendaraan_id');
     }
+
+    public function getFotoUrlAttribute(): string
+    {
+        $map = [
+            'LV-01' => 'https://commons.wikimedia.org/wiki/Special:FilePath/2020_Toyota_Hilux_Revo_4x4_Double-Cab_2.8_Rocco.jpg?width=800', // Toyota Hilux 4x4 Double Cabin 2.8
+            'LV-02' => 'https://commons.wikimedia.org/wiki/Special:FilePath/2021_Mitsubishi_Pajero_Sport_2.4_Dakar_4x2_(Indonesia)_front_view_01.jpg?width=800', // Mitsubishi Pajero Sport 4x4 Dakar
+            'LV-03' => 'https://commons.wikimedia.org/wiki/Special:FilePath/2016_Toyota_Fortuner_VRZ_(front),_West_Surabaya.jpg?width=800', // Toyota Fortuner 4x4 VRZ
+            'DT-01' => 'https://commons.wikimedia.org/wiki/Special:FilePath/ELS_Hino_Dutro_(2nd)_Topre_refrigerated_truck.jpg?width=800', // Hino Dutro 130 HD Cargo Box
+            'DT-02' => 'https://commons.wikimedia.org/wiki/Special:FilePath/2020_Mitsubishi_Fuso_Colt_Diesel_FE_74_HD_K_3.9_(20201212)_01.jpg?width=800', // Mitsubishi Fuso Canter Dump Truck
+            'HT-01' => 'https://commons.wikimedia.org/wiki/Special:FilePath/Scania_tipper_lorry_in_Russia.jpg?width=800', // Scania P360 Heavy Mining Dump Truck
+        ];
+
+        return $map[$this->nomor_lambung] ?? 'https://commons.wikimedia.org/wiki/Special:FilePath/2020_Toyota_Hilux_Revo_4x4_Double-Cab_2.8_Rocco.jpg?width=800';
+    }
 }
 
