@@ -116,127 +116,129 @@ S8 --> [*]
 
 ---
 
-## 5. Physical Data Model (PDM) & Rancangan Database
+## 5. Physical Data Model (PDM) & Struktur Tabel (Bahasa Indonesia)
 
-Berikut rancangan struktur tabel relasional yang saling terhubung:
+Berikut rancangan struktur tabel relasional dengan nama atribut berbahasa Indonesia yang saling terhubung:
 
 ```mermaid
 erDiagram
-    USERS ||--o{ BOOKINGS : "submits (admin)"
-    USERS ||--o{ BOOKING_APPROVALS : "approves (as approver)"
-    USERS ||--o{ ACTIVITY_LOGS : "causes"
+    USERS ||--o{ PEMESANAN : "menginput (admin)"
+    USERS ||--o{ PERSETUJUAN_PEMESANAN : "menyetujui (penyetuju)"
+    USERS ||--o{ LOG_AKTIVITAS : "melakukan"
     
-    LOCATIONS ||--o{ BOOKINGS : "destination"
-    LOCATIONS ||--o{ VEHICLES : "stationed_at"
+    LOKASI ||--o{ PEMESANAN : "lokasi_tujuan"
+    LOKASI ||--o{ KENDARAAN : "ditempatkan_di"
     
-    VEHICLES ||--o{ BOOKINGS : "allocated_to"
-    VEHICLES ||--o{ SERVICE_RECORDS : "undergoes"
-    VEHICLES ||--o{ FUEL_LOGS : "consumes"
+    KENDARAAN ||--o{ PEMESANAN : "digunakan_pada"
+    KENDARAAN ||--o{ CATATAN_SERVIS : "menjalani"
+    KENDARAAN ||--o{ LOG_BBM : "mengkonsumsi"
     
-    DRIVERS ||--o{ BOOKINGS : "assigned_to"
+    DRIVERS ||--o{ PEMESANAN : "ditugaskan_ke"
     
-    BOOKINGS ||--o{ BOOKING_APPROVALS : "has"
-    BOOKINGS ||--o{ FUEL_LOGS : "records"
+    PEMESANAN ||--o{ PERSETUJUAN_PEMESANAN : "memiliki"
+    PEMESANAN ||--o{ LOG_BBM : "mencatat"
 
     USERS {
         bigint id PK
-        string name
+        string nama
         string email
+        string peran "admin, penyetuju"
+        string jabatan "Admin Pool, Supervisor Tambang, General Manager"
+        string nomor_telepon
         string password
-        enum role "admin, approver"
-        string position "Pool Manager, Site Supervisor, GM, dll"
-        string phone
         timestamps created_at
     }
 
-    LOCATIONS {
+    LOKASI {
         bigint id PK
-        string code "HO-JKT, SITE-PML, dll"
-        string name "Site Pomalaa"
-        enum type "head_office, branch_office, mine_site"
-        string address
+        string kode_lokasi "HO-JKT, BO-KND, SITE-PML, dll"
+        string nama_lokasi "Kantor Pusat Jakarta, Site Pomalaa"
+        enum tipe_lokasi "kantor_pusat, kantor_cabang, tambang"
+        string alamat
     }
 
-    VEHICLES {
+    KENDARAAN {
         bigint id PK
-        string plate_number "DT 8821 XX"
-        string hull_number "LV-01, DT-05"
-        string brand_model "Toyota Hilux 4x4 / Hino Dutro"
-        enum vehicle_type "person_transport, cargo_transport"
-        enum ownership_type "company_owned, rented"
-        string rental_company_name "PT Trans Rental"
-        decimal rental_cost_per_month
-        bigint location_id FK
-        integer current_odometer_km
-        date last_service_date
-        date next_service_date
-        enum status "available, on_duty, maintenance"
+        string nomor_polisi "DT 8821 XX"
+        string nomor_lambung "LV-01, DT-05"
+        string merk_model "Toyota Hilux 4x4, Hino Dutro"
+        enum jenis_kendaraan "angkutan_orang, angkutan_barang"
+        enum kepemilikan "milik_perusahaan, sewa"
+        string nama_vendor_sewa
+        decimal biaya_sewa_bulanan
+        bigint lokasi_id FK
+        integer odometer_km
+        integer kapasitas_tangki
+        decimal konsumsi_bbm_per_liter
+        date tanggal_servis_terakhir
+        date tanggal_servis_berikutnya
+        enum status_kendaraan "tersedia, digunakan, perbaikan"
     }
 
     DRIVERS {
         bigint id PK
-        string name
-        string phone
-        string license_number
-        string license_type "SIM A, SIM B1, SIM B2 Umum"
-        enum status "standby, on_duty"
+        string nama_driver
+        string nomor_telepon
+        string nomor_sim
+        string jenis_sim "SIM A, SIM B1, SIM B2 Umum"
+        enum status_driver "standby, bertugas"
     }
 
-    BOOKINGS {
+    PEMESANAN {
         bigint id PK
-        string booking_code "BKG-202611-001"
-        bigint created_by_user_id FK
-        string borrower_name "Nama Pegawai Pemakai"
-        string borrower_department "Divisi Tambang / Eksplorasi"
-        text purpose "Keperluan / Urusan Dinas"
-        bigint vehicle_id FK
+        string kode_pemesanan "BKG-202611-0001"
+        bigint admin_id FK
+        string nama_pemesan
+        string divisi_pemesan
+        text keperluan
+        bigint kendaraan_id FK
         bigint driver_id FK
-        bigint destination_location_id FK
-        datetime start_datetime
-        datetime end_datetime
-        enum status "pending_level_1, pending_level_2, approved, rejected, completed"
-        text rejection_reason
+        bigint lokasi_tujuan_id FK
+        datetime tanggal_mulai
+        datetime tanggal_selesai
+        enum status_pemesanan "menunggu_level_1, menunggu_level_2, disetujui, ditolak, selesai"
+        text alasan_penolakan
         timestamps created_at
     }
 
-    BOOKING_APPROVALS {
+    PERSETUJUAN_PEMESANAN {
         bigint id PK
-        bigint booking_id FK
-        bigint approver_user_id FK
-        integer approval_level "1 atau 2"
-        enum status "pending, approved, rejected"
-        text notes
-        datetime action_datetime
+        bigint pemesanan_id FK
+        bigint penyetuju_id FK
+        integer level_persetujuan "1 atau 2"
+        enum status_persetujuan "menunggu, disetujui, ditolak"
+        text catatan
+        datetime waktu_aksi
     }
 
-    FUEL_LOGS {
+    LOG_BBM {
         bigint id PK
-        bigint booking_id FK
-        bigint vehicle_id FK
-        decimal liters
-        decimal cost_amount
-        integer start_odometer_km
-        integer end_odometer_km
-        date log_date
+        bigint pemesanan_id FK
+        bigint kendaraan_id FK
+        decimal jumlah_liter
+        decimal total_biaya
+        integer odometer_awal
+        integer odometer_akhir
+        date tanggal_isi
     }
 
-    SERVICE_RECORDS {
+    CATATAN_SERVIS {
         bigint id PK
-        bigint vehicle_id FK
-        date service_date
+        bigint kendaraan_id FK
+        date tanggal_servis
         integer odometer_km
-        text description
-        decimal cost_amount
-        string workshop_name
+        text deskripsi_servis
+        decimal biaya
+        string bengkel
     }
 
-    ACTIVITY_LOGS {
+    LOG_AKTIVITAS {
         bigint id PK
-        bigint user_id FK
-        string action "CREATE_BOOKING, APPROVE_L1, dll"
-        string description
-        string ip_address
-        string user_agent
+        bigint pengguna_id FK
+        string aksi "BUAT_PEMESANAN, SETUJUI_LEVEL_1, dll"
+        string deskripsi
+        string alamat_ip
+        string perangkat
         timestamps created_at
     }
 ```
