@@ -22,7 +22,7 @@
 
         <div class="flex-shrink-0 bg-slate-800/80 px-4 py-3 rounded-xl border border-slate-700 text-center sm:text-right">
             <div class="text-[10px] uppercase font-bold text-slate-400">Menunggu Tindakan Anda</div>
-            <div class="text-2xl font-bold text-white font-mono">{{ $antreanApproval->count() }} Permohonan</div>
+            <div class="text-2xl font-bold text-white tracking-tight">{{ $antreanApproval->count() }} Permohonan</div>
         </div>
     </div>
 
@@ -52,7 +52,7 @@
             <!-- Top Chip: Code & Level Info -->
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-2">
-                    <span class="font-mono text-xs font-bold text-slate-800 bg-slate-100 px-2.5 py-0.5 rounded border border-slate-200">
+                    <span class="text-xs font-bold text-slate-800 bg-slate-100 px-2.5 py-0.5 rounded border border-slate-200 tracking-tight">
                         {{ $b->kode_pemesanan }}
                     </span>
                     <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold
@@ -89,7 +89,7 @@
                     <div>
                         <div class="text-[10px] text-slate-400 font-semibold uppercase">Unit Kendaraan</div>
                         <div class="font-bold text-slate-900">{{ $b->kendaraan->nomor_lambung }} — {{ $b->kendaraan->merk_model }}</div>
-                        <div class="text-[11px] text-slate-500 font-mono">{{ $b->kendaraan->nomor_polisi }}</div>
+                        <div class="text-[11px] text-slate-500 font-medium">{{ $b->kendaraan->nomor_polisi }}</div>
                     </div>
                 </div>
 
@@ -100,7 +100,7 @@
                     <div>
                         <div class="text-[10px] text-slate-400 font-semibold uppercase">Pengemudi (Driver)</div>
                         <div class="font-bold text-slate-900">{{ $b->driver->nama_driver }}</div>
-                        <div class="text-[11px] text-slate-500 font-mono">{{ $b->driver->nomor_telepon }}</div>
+                        <div class="text-[11px] text-slate-500 font-medium">{{ $b->driver->nomor_telepon }}</div>
                     </div>
                 </div>
 
@@ -121,8 +121,8 @@
                     </div>
                     <div>
                         <div class="text-[10px] text-slate-400 font-semibold uppercase">Waktu Berangkat — Kembali</div>
-                        <div class="font-bold text-slate-900 font-mono">{{ $b->tanggal_mulai->format('d M H:i') }}</div>
-                        <div class="text-[11px] text-slate-500 font-mono">s/d {{ $b->tanggal_selesai->format('d M H:i') }}</div>
+                        <div class="font-bold text-slate-900">{{ $b->tanggal_mulai->format('d M H:i') }}</div>
+                        <div class="text-[11px] text-slate-500 font-medium">s/d {{ $b->tanggal_selesai->format('d M H:i') }}</div>
                     </div>
                 </div>
             </div>
@@ -170,7 +170,7 @@
                 <div class="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-slate-50 transition">
                     <div class="space-y-1">
                         <div class="flex items-center space-x-2">
-                            <span class="font-mono text-xs font-bold text-slate-800 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
+                            <span class="text-xs font-bold text-slate-800 bg-slate-100 px-2 py-0.5 rounded border border-slate-200 tracking-tight">
                                 {{ $b->kode_pemesanan }}
                             </span>
                             <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold

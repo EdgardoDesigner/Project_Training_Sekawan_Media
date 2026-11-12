@@ -193,7 +193,7 @@
                 <div class="p-4 sm:p-5 hover:bg-slate-50 transition flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div class="space-y-1.5">
                         <div class="flex items-center space-x-2">
-                            <span class="font-mono text-xs font-bold text-slate-800 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
+                            <span class="text-xs font-bold text-slate-800 bg-slate-100 px-2 py-0.5 rounded border border-slate-200 tracking-tight">
                                 {{ $p->kode_pemesanan }}
                             </span>
 

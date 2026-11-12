@@ -126,11 +126,11 @@
                 <tbody class="divide-y divide-slate-100">
                     @forelse($logs as $log)
                     <tr class="hover:bg-slate-50 transition">
-                        <td class="py-3 px-4 text-slate-500 font-mono text-[11px] whitespace-nowrap">
+                        <td class="py-3 px-4 text-slate-500 font-medium text-[11px] whitespace-nowrap">
                             {{ $log->created_at->format('d M Y H:i:s') }}
                         </td>
                         <td class="py-3 px-4">
-                            <span class="font-bold font-mono text-[10px] px-2 py-0.5 rounded
+                            <span class="font-bold text-[10px] px-2 py-0.5 rounded tracking-wide
                                 @if(str_contains($log->aksi, 'BUAT')) bg-blue-100 text-blue-800
                                 @elseif(str_contains($log->aksi, 'SETUJUI')) bg-emerald-100 text-emerald-800
                                 @elseif(str_contains($log->aksi, 'TOLAK')) bg-rose-100 text-rose-800
@@ -146,7 +146,7 @@
                         <td class="py-3 px-4 text-slate-700 leading-relaxed">
                             {{ $log->deskripsi }}
                         </td>
-                        <td class="py-3 px-4 text-slate-400 font-mono text-[11px] whitespace-nowrap">
+                        <td class="py-3 px-4 text-slate-400 font-medium text-[11px] whitespace-nowrap">
                             {{ $log->alamat_ip ?? '-' }}
                         </td>
                     </tr>

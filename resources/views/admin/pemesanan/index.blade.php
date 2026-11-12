@@ -171,7 +171,7 @@
                 <tbody class="divide-y divide-slate-100">
                     @forelse($pemesanan as $p)
                     <tr class="hover:bg-slate-50 transition">
-                        <td class="py-3.5 px-4 font-mono font-bold text-slate-800">
+                        <td class="py-3.5 px-4 font-bold text-slate-800 tracking-tight">
                             {{ $p->kode_pemesanan }}
                         </td>
                         <td class="py-3.5 px-4">

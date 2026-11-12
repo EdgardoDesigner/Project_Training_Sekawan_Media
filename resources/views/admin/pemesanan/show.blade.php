@@ -13,7 +13,7 @@
         </a>
         <div class="flex items-center space-x-2">
             <span class="text-xs text-slate-400">Kode Booking:</span>
-            <span class="font-mono text-xs font-bold bg-slate-100 text-slate-800 px-2.5 py-1 rounded border border-slate-200">
+            <span class="text-xs font-bold bg-slate-100 text-slate-800 px-2.5 py-1 rounded border border-slate-200 tracking-tight">
                 {{ $pemesanan->kode_pemesanan }}
             </span>
         </div>
@@ -35,7 +35,7 @@
                 </div>
                 <div class="text-xs font-bold text-slate-900">Diajukan Admin</div>
                 <div class="text-[11px] text-slate-500">{{ $pemesanan->admin->nama }}</div>
-                <div class="text-[10px] text-slate-400 font-mono">{{ $pemesanan->created_at->format('d/m/Y H:i') }}</div>
+                <div class="text-[10px] text-slate-400 font-medium">{{ $pemesanan->created_at->format('d/m/Y H:i') }}</div>
             </div>
 
             <!-- Step 2: Persetujuan Level 1 -->
@@ -58,7 +58,7 @@
                     Status: {{ ucfirst($l1->status_persetujuan ?? 'menunggu') }}
                 </div>
                 @if($l1 && $l1->waktu_aksi)
-                    <div class="text-[10px] text-slate-400 font-mono">{{ $l1->waktu_aksi->format('d/m/Y H:i') }}</div>
+                    <div class="text-[10px] text-slate-400 font-medium">{{ $l1->waktu_aksi->format('d/m/Y H:i') }}</div>
                 @endif
                 @if($l1 && $l1->catatan)
                     <div class="text-[10px] text-slate-600 italic bg-white p-1 rounded mt-1 border border-slate-100">"{{ $l1->catatan }}"</div>
@@ -86,7 +86,7 @@
                     Status: {{ ucfirst($l2->status_persetujuan ?? 'menunggu') }}
                 </div>
                 @if($l2 && $l2->waktu_aksi)
-                    <div class="text-[10px] text-slate-400 font-mono">{{ $l2->waktu_aksi->format('d/m/Y H:i') }}</div>
+                    <div class="text-[10px] text-slate-400 font-medium">{{ $l2->waktu_aksi->format('d/m/Y H:i') }}</div>
                 @endif
                 @if($l2 && $l2->catatan)
                     <div class="text-[10px] text-slate-600 italic bg-white p-1 rounded mt-1 border border-slate-100">"{{ $l2->catatan }}"</div>
@@ -145,11 +145,11 @@
                 </div>
                 <div class="flex justify-between py-1.5 border-b border-slate-100">
                     <span class="text-slate-500">Waktu Berangkat:</span>
-                    <span class="font-medium text-slate-800 font-mono">{{ $pemesanan->tanggal_mulai->format('d M Y H:i') }}</span>
+                    <span class="font-semibold text-slate-800">{{ $pemesanan->tanggal_mulai->format('d M Y H:i') }}</span>
                 </div>
                 <div class="flex justify-between py-1.5 border-b border-slate-100">
                     <span class="text-slate-500">Estimasi Kembali:</span>
-                    <span class="font-medium text-slate-800 font-mono">{{ $pemesanan->tanggal_selesai->format('d M Y H:i') }}</span>
+                    <span class="font-semibold text-slate-800">{{ $pemesanan->tanggal_selesai->format('d M Y H:i') }}</span>
                 </div>
                 <div class="pt-2">
                     <span class="text-slate-500 block mb-1">Keperluan Agenda:</span>
@@ -169,15 +169,30 @@
         </div>
 
         <!-- Detail Armada & Driver -->
-        <div class="bg-white rounded-2xl border border-slate-200 p-5 space-y-3 shadow-sm">
+        <div class="bg-white rounded-2xl border border-slate-200 p-5 space-y-4 shadow-sm">
             <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">
                 Alokasi Unit Armada & Pengemudi
             </h3>
 
+            <!-- Preview Foto Unit Armada -->
+            <div class="flex items-center gap-3.5 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <div class="relative w-20 h-14 rounded-lg overflow-hidden border border-slate-200 bg-slate-200 shrink-0">
+                    <img src="{{ $pemesanan->kendaraan->foto_url }}" alt="{{ $pemesanan->kendaraan->merk_model }}" class="w-full h-full object-cover">
+                </div>
+                <div class="min-w-0">
+                    <div class="font-bold text-slate-900 text-sm truncate">{{ $pemesanan->kendaraan->merk_model }}</div>
+                    <div class="text-xs text-slate-500 flex items-center gap-2 mt-0.5">
+                        <span class="font-bold text-slate-700">{{ $pemesanan->kendaraan->nomor_lambung }}</span>
+                        <span>&bull;</span>
+                        <span class="font-medium text-slate-600">{{ $pemesanan->kendaraan->nomor_polisi }}</span>
+                    </div>
+                </div>
+            </div>
+
             <div class="space-y-2 text-xs">
                 <div class="flex justify-between py-1.5 border-b border-slate-100">
                     <span class="text-slate-500">Nomor Lambung:</span>
-                    <span class="font-bold text-slate-900 font-mono">{{ $pemesanan->kendaraan->nomor_lambung }}</span>
+                    <span class="font-bold text-slate-900">{{ $pemesanan->kendaraan->nomor_lambung }}</span>
                 </div>
                 <div class="flex justify-between py-1.5 border-b border-slate-100">
                     <span class="text-slate-500">Merk & Model:</span>
@@ -185,7 +200,7 @@
                 </div>
                 <div class="flex justify-between py-1.5 border-b border-slate-100">
                     <span class="text-slate-500">Plat Nomor:</span>
-                    <span class="font-mono text-slate-700">{{ $pemesanan->kendaraan->nomor_polisi }}</span>
+                    <span class="font-semibold text-slate-700">{{ $pemesanan->kendaraan->nomor_polisi }}</span>
                 </div>
                 <div class="flex justify-between py-1.5 border-b border-slate-100">
                     <span class="text-slate-500">Kategori / Status:</span>
@@ -196,7 +211,7 @@
                 </div>
                 <div class="flex justify-between py-1.5 border-b border-slate-100">
                     <span class="text-slate-500">Odometer Terkini:</span>
-                    <span class="font-semibold text-slate-800 font-mono">{{ number_format($pemesanan->kendaraan->odometer_km) }} KM</span>
+                    <span class="font-bold text-slate-800">{{ number_format($pemesanan->kendaraan->odometer_km) }} KM</span>
                 </div>
                 <div class="flex justify-between py-1.5 border-b border-slate-100">
                     <span class="text-slate-500">Pengemudi (Driver):</span>
@@ -204,7 +219,7 @@
                 </div>
                 <div class="flex justify-between py-1.5 border-b border-slate-100">
                     <span class="text-slate-500">Kontak Driver:</span>
-                    <span class="font-mono text-slate-700">{{ $pemesanan->driver->nomor_telepon }}</span>
+                    <span class="font-semibold text-slate-700">{{ $pemesanan->driver->nomor_telepon }}</span>
                 </div>
             </div>
         </div>
@@ -232,8 +247,8 @@
                 </label>
                 <input type="number" name="odometer_akhir" min="{{ $pemesanan->kendaraan->odometer_km }}" required
                        value="{{ old('odometer_akhir', $pemesanan->kendaraan->odometer_km + 75) }}"
-                       class="w-full px-3 py-2 rounded-xl border border-slate-300 focus:border-slate-800 focus:ring-1 focus:ring-slate-800 outline-none text-xs sm:text-sm font-mono">
-                <span class="text-[10px] text-slate-400">Awal: {{ number_format($pemesanan->kendaraan->odometer_km) }} KM</span>
+                       class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none text-xs sm:text-sm font-semibold bg-slate-50 hover:bg-white text-slate-800 transition">
+                <span class="text-[10px] text-slate-400 mt-1 block">Awal: {{ number_format($pemesanan->kendaraan->odometer_km) }} KM</span>
             </div>
 
             <div>
@@ -242,7 +257,7 @@
                 </label>
                 <input type="number" step="0.1" name="jumlah_liter_bbm" min="0" value="{{ old('jumlah_liter_bbm', 15.0) }}"
                        placeholder="Contoh: 15.0"
-                       class="w-full px-3 py-2 rounded-xl border border-slate-300 focus:border-slate-800 focus:ring-1 focus:ring-slate-800 outline-none text-xs sm:text-sm font-mono">
+                       class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none text-xs sm:text-sm font-semibold bg-slate-50 hover:bg-white text-slate-800 transition">
             </div>
 
             <div>
@@ -251,7 +266,7 @@
                 </label>
                 <input type="number" name="biaya_bbm" min="0" value="{{ old('biaya_bbm', 225000) }}"
                        placeholder="Contoh: 225000"
-                       class="w-full px-3 py-2 rounded-xl border border-slate-300 focus:border-slate-800 focus:ring-1 focus:ring-slate-800 outline-none text-xs sm:text-sm font-mono">
+                       class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none text-xs sm:text-sm font-semibold bg-slate-50 hover:bg-white text-slate-800 transition">
             </div>
 
             <div class="sm:col-span-3 text-right pt-2">

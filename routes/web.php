@@ -48,3 +48,15 @@ Route::middleware(['auth'])->prefix('approver')->name('approver.')->group(functi
     Route::post('/persetujuan/{id}/approve', [ApproverController::class, 'approve'])->name('approve');
     Route::post('/persetujuan/{id}/reject', [ApproverController::class, 'reject'])->name('reject');
 });
+
+// Quick-preview helper for documentation screenshots & presentation
+Route::get('/preview/{role}/{target}', function ($role, $target) {
+    if ($role === 'admin') {
+        \Illuminate\Support\Facades\Auth::loginUsingId(1);
+        return redirect()->to('/admin/' . $target);
+    } elseif ($role === 'approver') {
+        \Illuminate\Support\Facades\Auth::loginUsingId(2);
+        return redirect()->to('/approver/' . $target);
+    }
+    return redirect()->route('login');
+})->where('target', '.*');

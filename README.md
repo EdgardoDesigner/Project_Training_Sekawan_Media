@@ -28,6 +28,34 @@ Aplikasi mengelola armada **Angkutan Orang** dan **Angkutan Barang**, baik yang 
 
 ---
 
+## 📸 Tangkapan Layar Aplikasi (Screenshots Gallery)
+
+### 1. Dashboard Eksekutif Admin & Visualisasi Grafik (Chart.js)
+![Dashboard Admin](docs/screenshots/02-dashboard-admin.png)
+
+### 2. Portal Persetujuan Berjenjang (Approver Level 1 & Level 2)
+![Portal Persetujuan](docs/screenshots/06-portal-approver.png)
+
+### 3. Monitoring Armada Tambang & Servis Berkala
+![Monitoring Armada](docs/screenshots/05-monitoring-armada.png)
+
+### 4. Manajemen Pemesanan Kendaraan & Formulir Pengajuan
+![Daftar Pemesanan](docs/screenshots/03-pemesanan-list.png)
+![Formulir Buat Pemesanan](docs/screenshots/04-pemesanan-create.png)
+
+### 5. Laporan Periodik & Ekspor Dokumen Excel (.xls)
+![Laporan Pemesanan](docs/screenshots/07-laporan-excel.png)
+
+### 6. Audit Trail Forensik (Log Aktivitas Sistem)
+![Audit Trail](docs/screenshots/08-audit-trail.png)
+
+### 7. Responsif Mobile Smartphone (Mobile-First View)
+| Mobile Dashboard Admin | Mobile Monitoring Armada |
+|:---:|:---:|
+| <img src="docs/screenshots/09-mobile-dashboard.png" width="300" /> | <img src="docs/screenshots/10-mobile-armada.png" width="300" /> |
+
+---
+
 ## 🛠 Spesifikasi Teknis
 Sesuai dengan kriteria evaluasi teknis:
 - **PHP Version:** `^8.2 / ^8.3 / ^8.5`

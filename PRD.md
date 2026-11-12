@@ -326,3 +326,50 @@ Sesuai instruksi soal, dokumen README.md akan memuat:
    - Setup file `.env`.
    - Menjalankan migrasi dan seeder data awal (`db:seed`).
    - Panduan cara mencoba alur pemesanan dan approval 2 level dari awal sampai selesai.
+
+---
+
+## 9. Rencana Pengembangan Fitur Masa Depan (Future Development Roadmap)
+
+Untuk meningkatkan efisiensi dan keandalan sistem dalam jangka panjang pada skala industri tambang terintegrasi, berikut adalah peta jalan (*roadmap*) pengembangan fitur lanjutan:
+
+### A. Telematika IoT & Pelacakan GPS Real-Time (Geofencing Site Tambang)
+- **Deskripsi:** Pemasangan modul GPS Tracker & OBD-II (On-Board Diagnostics) pada setiap unit armada.
+- **Manfaat:**
+  - Pelacakan koordinat posisi armada secara *real-time* di peta OpenStreetMap / Google Maps.
+  - Fitur *Geofencing*: Alarm otomatis jika kendaraan keluar dari perimeter batas izin area konsesi tambang tanpa persetujuan dinas.
+  - Pengukuran otomatis jam kerja mesin (*Engine Hour Meter*) untuk dump truck dan alat berat.
+
+### B. Notifikasi Instan Multi-Channel (WhatsApp Business API & Telegram Bot)
+- **Deskripsi:** Pengiriman *push notification* otomatis ke smartphone atasan ketika ada permohonan yang membutuhkan persetujuan.
+- **Fitur:**
+  - Tombol *One-Click Approval* langsung di dalam pesan WhatsApp/Telegram tanpa harus membuka browser terlebih dahulu.
+  - Notifikasi pengingat (*auto-reminder*) jika pengajuan persetujuan belum direspons dalam kurun waktu 2 jam.
+
+### C. AI / OCR Scanner Struk Pembelian BBM & Surat Jalan
+- **Deskripsi:** Integrasi Vision AI (Gemini Flash / Tesseract OCR) pada form penyelesaian perjalanan dinas.
+- **Manfaat:**
+  - Driver/Admin cukup memotret struk SPBU atau bon solar industri; sistem otomatis mengekstrak nominal biaya, jumlah liter, dan tanggal pembelian secara akurat tanpa *human-error* input manual.
+  - Verifikasi keaslian nota dinas dan pelaporan otomatis ke divisi *Finance & Accounting*.
+
+### D. Predictive Maintenance Berbasis Machine Learning
+- **Deskripsi:** Model prediktif yang memproyeksikan kapan komponen kendaraan (rem, oli mesin, ban tambang, filter) harus diganti sebelum terjadi kerusakan (*breakdown*).
+- **Manfaat:**
+  - Mencegah *downtime* operasi tambang yang mahal akibat kerusakan armada di tengah jalur *hauling*.
+  - Mengoptimalkan alokasi anggaran suku cadang dan memonitor riwayat performa bengkel vendor.
+
+### E. Progressive Web App (PWA) Offline-First untuk Area Blank Spot
+- **Deskripsi:** Mengingat banyak pit tambang nikel di pelosok Sulawesi/Maluku yang memiliki keterbatasan sinyal internet (*blank spot*).
+- **Fitur:**
+  - Aplikasi web dapat di-*install* langsung ke layar utama smartphone seperti aplikasi native.
+  - Penyimpanan data lokal (*IndexedDB / Service Worker*) yang memungkinkan pencatatan checklist inspeksi kendaraan harian (*pre-trip inspection*) saat offline, dan otomatis tersinkronisasi (*background sync*) saat perangkat kembali mendapat sinyal seluler atau Wi-Fi kantor site.
+
+### F. Tanda Tangan Digital Tersertifikasi (Digital Signature - e-Meterai & QR Code)
+- **Deskripsi:** Surat Jalan / Surat Izin Keluar Pool resmi dilengkapi dengan QR Code kriptografi dan tanda tangan digital terverifikasi.
+- **Manfaat:**
+  - Petugas keamanan (*Security Pos Utama Tambang*) cukup memindai QR Code menggunakan kamera ponsel untuk memverifikasi keabsahan izin keluar kendaraan secara cepat.
+
+### G. Integrasi Enterprise Resource Planning (ERP SAP / Oracle NetSuite)
+- **Deskripsi:** Modul API / Webhook dua arah untuk menghubungkan NikelFleet ke sistem ERP perusahaan.
+- **Manfaat:**
+  - Sinkronisasi biaya sewa vendor bulanan, depresiasi aset kendaraan, dan klaim biaya BBM langsung ke jurnal umum buku besar keuangan (*General Ledger*).
