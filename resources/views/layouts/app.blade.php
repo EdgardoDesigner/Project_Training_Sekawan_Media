@@ -208,6 +208,9 @@
                 Chart.defaults.font.family = "'Plus Jakarta Sans', sans-serif";
             }
         });
+        document.addEventListener('alpine:initialized', () => {
+            lucide.createIcons();
+        });
 
         function confirmLogout() {
             Swal.fire({

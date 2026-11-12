@@ -12,6 +12,7 @@
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -32,6 +33,7 @@
         }
     </script>
     <style>
+        [x-cloak] { display: none !important; }
         *, body, button, input, select, textarea {
             font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
             font-feature-settings: "tnum" 1, "cv02" 1, "cv03" 1, "cv04" 1, "cv11" 1;
@@ -114,16 +116,37 @@
 
                 <!-- Peran & Jabatan Grid -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    @php
+                        $roleMap = [
+                            'admin' => 'Admin Pool Kendaraan',
+                            'penyetuju' => 'Pihak Penyetuju (Approver)',
+                        ];
+                        $currentRole = old('peran', 'admin');
+                        $currentRoleLabel = $roleMap[$currentRole] ?? 'Pilih Peran';
+                    @endphp
                     <div>
-                        <label for="peran" class="block text-xs font-semibold text-slate-300 mb-1.5">Peran Akun</label>
-                        <div class="relative">
-                            <select id="peran" name="peran" required
-                                    class="w-full appearance-none pl-3.5 pr-9 py-2.5 rounded-xl bg-slate-950 border border-slate-800 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-xs sm:text-sm text-white outline-none transition cursor-pointer">
-                                <option value="admin" {{ old('peran') === 'admin' ? 'selected' : '' }}>Admin Pool Kendaraan</option>
-                                <option value="penyetuju" {{ old('peran') === 'penyetuju' ? 'selected' : '' }}>Pihak Penyetuju (Approver)</option>
-                            </select>
-                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400">
-                                <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                        <label for="peran" class="block text-xs font-semibold text-slate-300 mb-1.5">Peran Akun <span class="text-rose-500">*</span></label>
+                        <div class="relative" x-data="{ open: false, label: '{{ $currentRoleLabel }}', value: '{{ $currentRole }}' }">
+                            <input type="hidden" name="peran" :value="value">
+                            <button type="button" @click="open = !open" 
+                                    class="w-full flex items-center justify-between py-2.5 px-3.5 text-xs sm:text-sm font-medium rounded-xl bg-slate-950 border border-slate-800 hover:border-slate-700 text-white transition outline-none">
+                                <span x-text="label" class="truncate pr-2"></span>
+                                <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 transition-transform shrink-0" :class="open ? 'rotate-180' : ''"></i>
+                            </button>
+
+                            <!-- Dropdown Menu -->
+                            <div x-show="open" @click.away="open = false" x-cloak
+                                 x-transition:enter="transition ease-out duration-100"
+                                 x-transition:enter-start="opacity-0 scale-95"
+                                 x-transition:enter-end="opacity-100 scale-100"
+                                 class="absolute left-0 right-0 top-full mt-1.5 bg-slate-900 border border-slate-800 rounded-xl shadow-2xl z-50 p-1 space-y-0.5 text-xs">
+                                @foreach($roleMap as $rVal => $rLbl)
+                                <button type="button" @click="value = '{{ $rVal }}'; label = '{{ $rLbl }}'; open = false"
+                                        class="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-800 text-slate-200 font-medium flex items-center justify-between">
+                                    <span>{{ $rLbl }}</span>
+                                    <i x-show="value === '{{ $rVal }}'" data-lucide="check" class="w-3.5 h-3.5 text-brand-400"></i>
+                                </button>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -206,6 +229,9 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+        });
+        document.addEventListener('alpine:initialized', () => {
             lucide.createIcons();
         });
 
