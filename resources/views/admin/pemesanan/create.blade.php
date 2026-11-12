@@ -118,14 +118,24 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-xs font-semibold text-slate-700 mb-1.5">Waktu Berangkat <span class="text-rose-500">*</span></label>
-                        <input type="datetime-local" name="tanggal_mulai" value="{{ old('tanggal_mulai', date('Y-m-d\TH:i')) }}" required
-                               class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:border-slate-800 focus:ring-1 focus:ring-slate-800 outline-none text-xs sm:text-sm font-mono">
+                        <div class="relative">
+                            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400">
+                                <i data-lucide="calendar" class="w-4 h-4"></i>
+                            </div>
+                            <input type="datetime-local" name="tanggal_mulai" value="{{ old('tanggal_mulai', date('Y-m-d\TH:i')) }}" required
+                                   class="w-full pl-10 pr-3.5 py-2.5 rounded-xl border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none text-xs sm:text-sm font-medium bg-slate-50 hover:bg-white text-slate-800 transition">
+                        </div>
                     </div>
 
                     <div>
                         <label class="block text-xs font-semibold text-slate-700 mb-1.5">Estimasi Waktu Kembali <span class="text-rose-500">*</span></label>
-                        <input type="datetime-local" name="tanggal_selesai" value="{{ old('tanggal_selesai', date('Y-m-d\TH:i', strtotime('+1 day'))) }}" required
-                               class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:border-slate-800 focus:ring-1 focus:ring-slate-800 outline-none text-xs sm:text-sm font-mono">
+                        <div class="relative">
+                            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400">
+                                <i data-lucide="calendar" class="w-4 h-4"></i>
+                            </div>
+                            <input type="datetime-local" name="tanggal_selesai" value="{{ old('tanggal_selesai', date('Y-m-d\TH:i', strtotime('+1 day'))) }}" required
+                                   class="w-full pl-10 pr-3.5 py-2.5 rounded-xl border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none text-xs sm:text-sm font-medium bg-slate-50 hover:bg-white text-slate-800 transition">
+                        </div>
                     </div>
                 </div>
             </div>

@@ -114,9 +114,15 @@
                 </div>
 
                 <div class="flex items-center justify-between text-xs pt-1">
-                    <label class="flex items-center text-slate-400 cursor-pointer">
-                        <input type="checkbox" name="remember" class="rounded border-slate-700 bg-slate-950 text-brand-600 focus:ring-0 mr-2">
-                        Ingat sesi masuk
+                    <label class="inline-flex items-center text-slate-400 hover:text-slate-300 cursor-pointer select-none group">
+                        <div class="relative flex items-center justify-center mr-2">
+                            <input type="checkbox" name="remember" class="peer sr-only">
+                            <div class="w-4 h-4 rounded border border-slate-700 bg-transparent transition-colors peer-checked:bg-brand-600 peer-checked:border-brand-600 group-hover:border-slate-500 flex items-center justify-center"></div>
+                            <svg class="w-2.5 h-2.5 text-white absolute pointer-events-none hidden peer-checked:block stroke-[3.5]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                            </svg>
+                        </div>
+                        <span>Ingat sesi masuk</span>
                     </label>
                 </div>
 
