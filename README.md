@@ -39,9 +39,8 @@ Aplikasi mengelola armada **Angkutan Orang** dan **Angkutan Barang**, baik yang 
 ### 3. Monitoring Armada Tambang & Servis Berkala
 ![Monitoring Armada](docs/screenshots/05-monitoring-armada.png)
 
-### 4. Manajemen Pemesanan Kendaraan & Formulir Pengajuan
+### 4. Manajemen Pemesanan Kendaraan
 ![Daftar Pemesanan](docs/screenshots/03-pemesanan-list.png)
-![Formulir Buat Pemesanan](docs/screenshots/04-pemesanan-create.png)
 
 ### 5. Laporan Periodik & Ekspor Dokumen Excel (.xls)
 ![Laporan Pemesanan](docs/screenshots/07-laporan-excel.png)
