@@ -14,4 +14,6 @@ elif [ -d "$HOME/.local/php_pkg/etc" ]; then
     export LD_LIBRARY_PATH="$HOME/.local/php_pkg/usr/lib:${LD_LIBRARY_PATH}"
 fi
 
-php artisan serve --host=127.0.0.1 --port=8000
+PORT="${1:-8000}"
+echo "🚀 Server aktif di: http://127.0.0.1:$PORT"
+php artisan serve --host=127.0.0.1 --port="$PORT"
